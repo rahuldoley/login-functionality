@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import firebase from "firebase";
 import { auth } from "./firebase";
-import { useHistory } from "react-router-dom";
+import Navbar from './Navbar';
+import { useHistory, Link } from "react-router-dom";
 
 const SignIn = () => {
     const history = useHistory();
@@ -42,7 +43,6 @@ const SignIn = () => {
         signInOptions: [
           firebase.auth.GoogleAuthProvider.PROVIDER_ID,
           firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-          firebase.auth.TwitterAuthProvider.PROVIDER_ID,
           firebase.auth.GithubAuthProvider.PROVIDER_ID
         ],
         callbacks: {
@@ -64,9 +64,10 @@ const SignIn = () => {
         <div>
             {isSignedIn ? (
                 <span>
+                <Navbar />
                 <div className="pa4 pb6 ">Signed In!</div>
                 <h1 className="monaco">Welcome {firebase.auth().currentUser.displayName}</h1>
-                <button className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib" onClick={() => firebase.auth().signOut()}>Sign out!</button>
+                <Link to='/findoutmore'><button className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib">Find out more</button></Link>
                 </span>
             ) : (   
                     <article className="br2 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center">
